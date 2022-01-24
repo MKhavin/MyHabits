@@ -4,6 +4,7 @@ class TabBarController: UITabBarController {
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
         tabBar.tintColor = FontsColor.purple
         if #available(iOS 15, *) {
             tabBar.scrollEdgeAppearance = tabBar.standardAppearance
@@ -18,6 +19,7 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         let habitsNavController = UINavigationController()
+        habitsNavController.setViewControllers([HabitsViewController()], animated: false)
         habitsNavController.tabBarItem.title = "Привычки"
         habitsNavController.tabBarItem.image = UIImage(systemName: "list.dash")
         

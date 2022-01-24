@@ -4,7 +4,7 @@ class InfoViewController: UIViewController {
 
     private lazy var infoStackView: UIScrollView = {
         let value = UIScrollView()
-        value.translatesAutoresizingMaskIntoConstraints = false
+        value.toAutoLayout()
         value.showsVerticalScrollIndicator = true
         value.showsHorizontalScrollIndicator = false
         return value
@@ -12,22 +12,13 @@ class InfoViewController: UIViewController {
     
     
     private lazy var infoHeader: UILabel = {
-        let value = UILabel()
-        value.translatesAutoresizingMaskIntoConstraints = false
-        value.font = .systemFont(ofSize: 20, weight: .semibold)
-        value.text = "Привычка за 21 день"
-        value.textColor = .black
+        let value = UILabel(font: Fonts.title3, text: "Привычка за 21 день")
+        value.toAutoLayout()
         return value
     }()
     
     private lazy var infoText: UILabel = {
-        let value = UILabel()
-        value.translatesAutoresizingMaskIntoConstraints = false
-        value.font = .preferredFont(forTextStyle: .body).withSize(17)
-        value.textAlignment = .left
-        value.numberOfLines = 0
-        value.lineBreakMode = .byWordWrapping
-        value.text = """
+        let text = """
         Прохождение этапов, за которые за 21 день вырабатывается привычка, подчиняется следующему алгоритму:
         
         1. Провести 1 день без обращения к старым привычкам, стараться вести себя так, как будто цель, загаданная в перспективу, находится на расстоянии шага.
@@ -43,18 +34,23 @@ class InfoViewController: UIViewController {
         
         6. На 90-й день соблюдения техники все лишнее из «прошлой жизни» перестает напоминать о себе, и человек, оглянувшись назад, осознает себя полностью обновившимся.
         """
-        value.textColor = .black
+        let value = UILabel(font: Fonts.body, text: text)
+        value.toAutoLayout()
+        value.textAlignment = .left
+        value.numberOfLines = 0
+        value.lineBreakMode = .byWordWrapping
         return value
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationItem.title = "Информация"
+        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
+        
         infoStackView.addSubview(infoHeader)
         infoStackView.addSubview(infoText)
         view.addSubview(infoStackView)
-        navigationItem.title = "Информация"
-        navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
     }
     
     override func viewWillLayoutSubviews() {
@@ -68,15 +64,15 @@ class InfoViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            infoHeader.topAnchor.constraint(equalTo: infoStackView.topAnchor, constant: 16),
-            infoHeader.leadingAnchor.constraint(equalTo: infoStackView.leadingAnchor, constant: 16),
-            infoHeader.trailingAnchor.constraint(equalTo: infoStackView.trailingAnchor, constant: -16)
+            infoHeader.topAnchor.constraint(equalTo: infoStackView.topAnchor, constant: GlobalConstants.subViewsBorderInset),
+            infoHeader.leadingAnchor.constraint(equalTo: infoStackView.leadingAnchor, constant: GlobalConstants.subViewsBorderInset),
+            infoHeader.trailingAnchor.constraint(equalTo: infoStackView.trailingAnchor, constant: -GlobalConstants.subViewsBorderInset)
         ])
         
         NSLayoutConstraint.activate([
-            infoText.topAnchor.constraint(equalTo: infoHeader.bottomAnchor, constant: 16),
-            infoText.leadingAnchor.constraint(equalTo: infoStackView.leadingAnchor, constant: 16),
-            infoText.trailingAnchor.constraint(equalTo: infoStackView.trailingAnchor, constant: -16),
+            infoText.topAnchor.constraint(equalTo: infoHeader.bottomAnchor, constant: GlobalConstants.subViewsBorderInset),
+            infoText.leadingAnchor.constraint(equalTo: infoStackView.leadingAnchor, constant: GlobalConstants.subViewsBorderInset),
+            infoText.trailingAnchor.constraint(equalTo: infoStackView.trailingAnchor, constant: -GlobalConstants.subViewsBorderInset),
             infoText.bottomAnchor.constraint(equalTo: infoStackView.bottomAnchor)
         ])
     }

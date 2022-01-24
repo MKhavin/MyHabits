@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		513E8D2327824F0E00147F56 /* FontsColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513E8D2227824F0E00147F56 /* FontsColor.swift */; };
+		518D6A5B278F79BB00ECC103 /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D6A5A278F79BB00ECC103 /* ProgressCollectionViewCell.swift */; };
+		518D6A5D278F79CB00ECC103 /* HabitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D6A5C278F79CB00ECC103 /* HabitCollectionViewCell.swift */; };
+		51940AE5278CBCC500EC7FA7 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51940AE4278CBCC500EC7FA7 /* GlobalConstants.swift */; };
+		51940AE7278CBE7300EC7FA7 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51940AE6278CBE7300EC7FA7 /* UIViewExtension.swift */; };
+		51940AE9278CC04300EC7FA7 /* HabitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51940AE8278CC04200EC7FA7 /* HabitsViewController.swift */; };
+		51940AEB278CC4AD00EC7FA7 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51940AEA278CC4AD00EC7FA7 /* HabitViewController.swift */; };
+		51940AED278CCE7B00EC7FA7 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51940AEC278CCE7B00EC7FA7 /* Fonts.swift */; };
 		51BF4C14277CF16F0003D231 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF4C13277CF16F0003D231 /* AppDelegate.swift */; };
 		51BF4C18277CF16F0003D231 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF4C17277CF16F0003D231 /* ViewController.swift */; };
 		51BF4C1D277CF1710003D231 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BF4C1C277CF1710003D231 /* Assets.xcassets */; };
@@ -19,6 +26,13 @@
 
 /* Begin PBXFileReference section */
 		513E8D2227824F0E00147F56 /* FontsColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsColor.swift; sourceTree = "<group>"; };
+		518D6A5A278F79BB00ECC103 /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
+		518D6A5C278F79CB00ECC103 /* HabitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCollectionViewCell.swift; sourceTree = "<group>"; };
+		51940AE4278CBCC500EC7FA7 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
+		51940AE6278CBE7300EC7FA7 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		51940AE8278CC04200EC7FA7 /* HabitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewController.swift; sourceTree = "<group>"; };
+		51940AEA278CC4AD00EC7FA7 /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
+		51940AEC278CCE7B00EC7FA7 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		51BF4C10277CF16F0003D231 /* MyHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BF4C13277CF16F0003D231 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51BF4C17277CF16F0003D231 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +59,7 @@
 			isa = PBXGroup;
 			children = (
 				513E8D2227824F0E00147F56 /* FontsColor.swift */,
+				51940AEC278CCE7B00EC7FA7 /* Fonts.swift */,
 			);
 			path = TextStyle;
 			sourceTree = "<group>";
@@ -69,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				513E8D2127824EF700147F56 /* TextStyle */,
+				51940AE6278CBE7300EC7FA7 /* UIViewExtension.swift */,
 				51BF4C27277CFBAB0003D231 /* HabitsStore.swift */,
 				51BF4C13277CF16F0003D231 /* AppDelegate.swift */,
 				51BF4C17277CF16F0003D231 /* ViewController.swift */,
@@ -77,6 +93,11 @@
 				51BF4C21277CF1710003D231 /* Info.plist */,
 				51ED2835277D05CC00F26E82 /* InfoViewController.swift */,
 				51F531022783113C006F6D8D /* TabBarController.swift */,
+				51940AE4278CBCC500EC7FA7 /* GlobalConstants.swift */,
+				51940AE8278CC04200EC7FA7 /* HabitsViewController.swift */,
+				51940AEA278CC4AD00EC7FA7 /* HabitViewController.swift */,
+				518D6A5A278F79BB00ECC103 /* ProgressCollectionViewCell.swift */,
+				518D6A5C278F79CB00ECC103 /* HabitCollectionViewCell.swift */,
 			);
 			path = MyHabits;
 			sourceTree = "<group>";
@@ -153,9 +174,16 @@
 			files = (
 				513E8D2327824F0E00147F56 /* FontsColor.swift in Sources */,
 				51BF4C28277CFBAB0003D231 /* HabitsStore.swift in Sources */,
+				518D6A5B278F79BB00ECC103 /* ProgressCollectionViewCell.swift in Sources */,
 				51BF4C18277CF16F0003D231 /* ViewController.swift in Sources */,
 				51F531032783113C006F6D8D /* TabBarController.swift in Sources */,
+				51940AE9278CC04300EC7FA7 /* HabitsViewController.swift in Sources */,
+				51940AE5278CBCC500EC7FA7 /* GlobalConstants.swift in Sources */,
 				51ED2836277D05CC00F26E82 /* InfoViewController.swift in Sources */,
+				51940AEB278CC4AD00EC7FA7 /* HabitViewController.swift in Sources */,
+				51940AED278CCE7B00EC7FA7 /* Fonts.swift in Sources */,
+				518D6A5D278F79CB00ECC103 /* HabitCollectionViewCell.swift in Sources */,
+				51940AE7278CBE7300EC7FA7 /* UIViewExtension.swift in Sources */,
 				51BF4C14277CF16F0003D231 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -304,7 +332,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -332,7 +360,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
