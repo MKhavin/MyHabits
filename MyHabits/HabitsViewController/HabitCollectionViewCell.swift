@@ -2,8 +2,19 @@ import UIKit
 
 class HabitCollectionViewCell: UICollectionViewCell {
     
+    /// Перечисление с константами для AutoLayout
+    private enum LayoutConstants: CGFloat {
+        case deafultValue = 20
+        case titleWidth = 220
+        case widthHeightCheckButton = 38
+    }
+    
+    /// Текущая привычка в коллекции
     private var habitData: Habit?
     
+    // MARK: - UI elements
+    
+    /// Кнопка подтверждения
     private lazy var checkButton: UIButton = {
         let view = UIButton()
         view.toAutoLayout()
@@ -15,27 +26,29 @@ class HabitCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
+    /// Имя привычки
     private lazy var titleLabel: UILabel = {
-        let view = UILabel(font: Fonts.headLine,
-                           text: "")
+        let view = UILabel(font: Fonts.headLine)
         view.numberOfLines = 2
         return view
     }()
     
+    /// Детальная информация(время) о привычке
     private lazy var infoLabel: UILabel = {
-        let view = UILabel(font: Fonts.caption,
-                           text: "")
+        let view = UILabel(font: Fonts.caption)
         view.textColor = FontsColor.lightGray
         return view
     }()
     
+    /// Информация о кол-ве подтверждений за весь период
     private lazy var countLabel: UILabel = {
-        let view = UILabel(font: Fonts.footnote,
-                           text: "")
+        let view = UILabel(font: Fonts.footnote)
         view.textColor = FontsColor.gray
         return view
     }()
-        
+    
+    // MARK: - Lifecycle
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -53,33 +66,36 @@ class HabitCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// Процедура задания расположения элементов
     private func setSubViewsLayout() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 20),
-            titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            titleLabel.widthAnchor.constraint(equalToConstant: 220)
+            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: LayoutConstants.deafultValue.rawValue),
+            titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.deafultValue.rawValue),
+            titleLabel.widthAnchor.constraint(equalToConstant: LayoutConstants.titleWidth.rawValue)
         ])
         
         NSLayoutConstraint.activate([
             infoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-            infoLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20)
+            infoLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.deafultValue.rawValue)
         ])
         
         NSLayoutConstraint.activate([
-            countLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            countLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 20)
+            countLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -LayoutConstants.deafultValue.rawValue),
+            countLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.deafultValue.rawValue)
         ])
         
         NSLayoutConstraint.activate([
             checkButton.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
-            checkButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            checkButton.widthAnchor.constraint(equalToConstant: 38),
-            checkButton.heightAnchor.constraint(equalToConstant: 38)
+            checkButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -LayoutConstants.deafultValue.rawValue),
+            checkButton.widthAnchor.constraint(equalToConstant: LayoutConstants.widthHeightCheckButton.rawValue),
+            checkButton.heightAnchor.constraint(equalToConstant: LayoutConstants.widthHeightCheckButton.rawValue)
         ])
     }
     
+    /// Процедура, которая заполняет данными элементы
     private func setSubViewsAppearance(by habit: Habit) {
         checkButton.layer.borderColor = habit.color.cgColor
+        
         if habit.isAlreadyTakenToday {
             checkButton.backgroundColor = habit.color
             checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
@@ -97,6 +113,7 @@ class HabitCollectionViewCell: UICollectionViewCell {
         countLabel.text = "Счётчик: \(habit.trackDates.count)"
     }
     
+    /// Процедура, которая получает данные привычки
     func setCell(data: Habit) {
         habitData = data
         
@@ -107,6 +124,9 @@ class HabitCollectionViewCell: UICollectionViewCell {
         setSubViewsAppearance(by: unpackedData)
     }
     
+    // MARK: - Target's funcs
+    
+    /// Процедура обработки подтверждения
     @objc func trackHabit(_ sender: UIButton) {
         guard let unpackedData = habitData, !unpackedData.isAlreadyTakenToday else {
             return

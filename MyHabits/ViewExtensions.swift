@@ -13,7 +13,7 @@ extension UIView {
 }
 
 extension UILabel {
-    convenience init(font customFont: Font, text: String) {
+    convenience init(font customFont: Font, text: String = "") {
         self.init(frame: .zero)
         self.toAutoLayout()
         font = customFont.font

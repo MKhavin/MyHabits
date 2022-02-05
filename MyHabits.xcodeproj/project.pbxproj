@@ -20,6 +20,7 @@
 		51BF4C1D277CF1710003D231 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BF4C1C277CF1710003D231 /* Assets.xcassets */; };
 		51BF4C20277CF1710003D231 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51BF4C1E277CF1710003D231 /* LaunchScreen.storyboard */; };
 		51BF4C28277CFBAB0003D231 /* HabitsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF4C27277CFBAB0003D231 /* HabitsStore.swift */; };
+		51D2092727AF195B00E5D09D /* Localization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 51D2092927AF195B00E5D09D /* Localization.strings */; };
 		51ED2836277D05CC00F26E82 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51ED2835277D05CC00F26E82 /* InfoViewController.swift */; };
 		51F531032783113C006F6D8D /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F531022783113C006F6D8D /* TabBarController.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,8 @@
 		51BF4C1F277CF1710003D231 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51BF4C21277CF1710003D231 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51BF4C27277CFBAB0003D231 /* HabitsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HabitsStore.swift; path = "../../../../../Downloads/iosui-diplom-main/HabitsStore.swift"; sourceTree = "<group>"; };
+		51D2092827AF195B00E5D09D /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localization.strings; sourceTree = "<group>"; };
+		51D2092A27AF195F00E5D09D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localization.strings; sourceTree = "<group>"; };
 		51ED2835277D05CC00F26E82 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		51F531022783113C006F6D8D /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -77,6 +80,7 @@
 		51BF4C07277CF16F0003D231 = {
 			isa = PBXGroup;
 			children = (
+				51D2092927AF195B00E5D09D /* Localization.strings */,
 				51BF4C12277CF16F0003D231 /* MyHabits */,
 				51BF4C11277CF16F0003D231 /* Products */,
 			);
@@ -152,6 +156,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 51BF4C07277CF16F0003D231;
 			productRefGroup = 51BF4C11277CF16F0003D231 /* Products */;
@@ -169,6 +174,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51BF4C20277CF1710003D231 /* LaunchScreen.storyboard in Resources */,
+				51D2092727AF195B00E5D09D /* Localization.strings in Resources */,
 				51BF4C1D277CF1710003D231 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -207,6 +213,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		51D2092927AF195B00E5D09D /* Localization.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				51D2092827AF195B00E5D09D /* ru */,
+				51D2092A27AF195F00E5D09D /* en */,
+			);
+			name = Localization.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -214,6 +229,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -275,6 +291,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
