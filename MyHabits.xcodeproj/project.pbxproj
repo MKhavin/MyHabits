@@ -8,15 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		513E8D2327824F0E00147F56 /* FontsColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513E8D2227824F0E00147F56 /* FontsColor.swift */; };
+		5153F25127A3D0F900AE61B1 /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153F25027A3D0F900AE61B1 /* HabitDetailsViewController.swift */; };
 		518D6A5B278F79BB00ECC103 /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D6A5A278F79BB00ECC103 /* ProgressCollectionViewCell.swift */; };
 		518D6A5D278F79CB00ECC103 /* HabitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D6A5C278F79CB00ECC103 /* HabitCollectionViewCell.swift */; };
 		51940AE5278CBCC500EC7FA7 /* GlobalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51940AE4278CBCC500EC7FA7 /* GlobalConstants.swift */; };
-		51940AE7278CBE7300EC7FA7 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51940AE6278CBE7300EC7FA7 /* UIViewExtension.swift */; };
+		51940AE7278CBE7300EC7FA7 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51940AE6278CBE7300EC7FA7 /* ViewExtensions.swift */; };
 		51940AE9278CC04300EC7FA7 /* HabitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51940AE8278CC04200EC7FA7 /* HabitsViewController.swift */; };
 		51940AEB278CC4AD00EC7FA7 /* HabitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51940AEA278CC4AD00EC7FA7 /* HabitViewController.swift */; };
 		51940AED278CCE7B00EC7FA7 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51940AEC278CCE7B00EC7FA7 /* Fonts.swift */; };
 		51BF4C14277CF16F0003D231 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF4C13277CF16F0003D231 /* AppDelegate.swift */; };
-		51BF4C18277CF16F0003D231 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF4C17277CF16F0003D231 /* ViewController.swift */; };
 		51BF4C1D277CF1710003D231 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51BF4C1C277CF1710003D231 /* Assets.xcassets */; };
 		51BF4C20277CF1710003D231 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51BF4C1E277CF1710003D231 /* LaunchScreen.storyboard */; };
 		51BF4C28277CFBAB0003D231 /* HabitsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BF4C27277CFBAB0003D231 /* HabitsStore.swift */; };
@@ -26,16 +26,16 @@
 
 /* Begin PBXFileReference section */
 		513E8D2227824F0E00147F56 /* FontsColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsColor.swift; sourceTree = "<group>"; };
+		5153F25027A3D0F900AE61B1 /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
 		518D6A5A278F79BB00ECC103 /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
 		518D6A5C278F79CB00ECC103 /* HabitCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitCollectionViewCell.swift; sourceTree = "<group>"; };
 		51940AE4278CBCC500EC7FA7 /* GlobalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstants.swift; sourceTree = "<group>"; };
-		51940AE6278CBE7300EC7FA7 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		51940AE6278CBE7300EC7FA7 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
 		51940AE8278CC04200EC7FA7 /* HabitsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsViewController.swift; sourceTree = "<group>"; };
 		51940AEA278CC4AD00EC7FA7 /* HabitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitViewController.swift; sourceTree = "<group>"; };
 		51940AEC278CCE7B00EC7FA7 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		51BF4C10277CF16F0003D231 /* MyHabits.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyHabits.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51BF4C13277CF16F0003D231 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		51BF4C17277CF16F0003D231 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		51BF4C1C277CF1710003D231 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51BF4C1F277CF1710003D231 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51BF4C21277CF1710003D231 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,6 +64,16 @@
 			path = TextStyle;
 			sourceTree = "<group>";
 		};
+		519D9F1827A88E8F007FF6F0 /* HabitsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				51940AE8278CC04200EC7FA7 /* HabitsViewController.swift */,
+				518D6A5A278F79BB00ECC103 /* ProgressCollectionViewCell.swift */,
+				518D6A5C278F79CB00ECC103 /* HabitCollectionViewCell.swift */,
+			);
+			path = HabitsViewController;
+			sourceTree = "<group>";
+		};
 		51BF4C07277CF16F0003D231 = {
 			isa = PBXGroup;
 			children = (
@@ -84,20 +94,18 @@
 			isa = PBXGroup;
 			children = (
 				513E8D2127824EF700147F56 /* TextStyle */,
-				51940AE6278CBE7300EC7FA7 /* UIViewExtension.swift */,
+				51940AE6278CBE7300EC7FA7 /* ViewExtensions.swift */,
 				51BF4C27277CFBAB0003D231 /* HabitsStore.swift */,
 				51BF4C13277CF16F0003D231 /* AppDelegate.swift */,
-				51BF4C17277CF16F0003D231 /* ViewController.swift */,
 				51BF4C1C277CF1710003D231 /* Assets.xcassets */,
 				51BF4C1E277CF1710003D231 /* LaunchScreen.storyboard */,
 				51BF4C21277CF1710003D231 /* Info.plist */,
 				51ED2835277D05CC00F26E82 /* InfoViewController.swift */,
 				51F531022783113C006F6D8D /* TabBarController.swift */,
 				51940AE4278CBCC500EC7FA7 /* GlobalConstants.swift */,
-				51940AE8278CC04200EC7FA7 /* HabitsViewController.swift */,
+				519D9F1827A88E8F007FF6F0 /* HabitsViewController */,
 				51940AEA278CC4AD00EC7FA7 /* HabitViewController.swift */,
-				518D6A5A278F79BB00ECC103 /* ProgressCollectionViewCell.swift */,
-				518D6A5C278F79CB00ECC103 /* HabitCollectionViewCell.swift */,
+				5153F25027A3D0F900AE61B1 /* HabitDetailsViewController.swift */,
 			);
 			path = MyHabits;
 			sourceTree = "<group>";
@@ -175,15 +183,15 @@
 				513E8D2327824F0E00147F56 /* FontsColor.swift in Sources */,
 				51BF4C28277CFBAB0003D231 /* HabitsStore.swift in Sources */,
 				518D6A5B278F79BB00ECC103 /* ProgressCollectionViewCell.swift in Sources */,
-				51BF4C18277CF16F0003D231 /* ViewController.swift in Sources */,
 				51F531032783113C006F6D8D /* TabBarController.swift in Sources */,
 				51940AE9278CC04300EC7FA7 /* HabitsViewController.swift in Sources */,
 				51940AE5278CBCC500EC7FA7 /* GlobalConstants.swift in Sources */,
 				51ED2836277D05CC00F26E82 /* InfoViewController.swift in Sources */,
 				51940AEB278CC4AD00EC7FA7 /* HabitViewController.swift in Sources */,
 				51940AED278CCE7B00EC7FA7 /* Fonts.swift in Sources */,
+				5153F25127A3D0F900AE61B1 /* HabitDetailsViewController.swift in Sources */,
 				518D6A5D278F79CB00ECC103 /* HabitCollectionViewCell.swift in Sources */,
-				51940AE7278CBE7300EC7FA7 /* UIViewExtension.swift in Sources */,
+				51940AE7278CBE7300EC7FA7 /* ViewExtensions.swift in Sources */,
 				51BF4C14277CF16F0003D231 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -7,13 +7,16 @@ class InfoViewController: UIViewController {
         value.toAutoLayout()
         value.showsVerticalScrollIndicator = true
         value.showsHorizontalScrollIndicator = false
+        value.addSubviews([
+            infoHeader,
+            infoText
+        ])
         return value
     }()
     
     
     private lazy var infoHeader: UILabel = {
         let value = UILabel(font: Fonts.title3, text: "Привычка за 21 день")
-        value.toAutoLayout()
         return value
     }()
     
@@ -35,7 +38,6 @@ class InfoViewController: UIViewController {
         6. На 90-й день соблюдения техники все лишнее из «прошлой жизни» перестает напоминать о себе, и человек, оглянувшись назад, осознает себя полностью обновившимся.
         """
         let value = UILabel(font: Fonts.body, text: text)
-        value.toAutoLayout()
         value.textAlignment = .left
         value.numberOfLines = 0
         value.lineBreakMode = .byWordWrapping
@@ -48,8 +50,6 @@ class InfoViewController: UIViewController {
         navigationItem.title = "Информация"
         navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
         
-        infoStackView.addSubview(infoHeader)
-        infoStackView.addSubview(infoText)
         view.addSubview(infoStackView)
     }
     
@@ -64,16 +64,23 @@ class InfoViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            infoHeader.topAnchor.constraint(equalTo: infoStackView.topAnchor, constant: GlobalConstants.subViewsBorderInset),
-            infoHeader.leadingAnchor.constraint(equalTo: infoStackView.leadingAnchor, constant: GlobalConstants.subViewsBorderInset),
-            infoHeader.trailingAnchor.constraint(equalTo: infoStackView.trailingAnchor, constant: -GlobalConstants.subViewsBorderInset)
+            infoHeader.topAnchor.constraint(equalTo: infoStackView.topAnchor,
+                                            constant: GlobalConstants.subViewsBorderInset),
+            infoHeader.leadingAnchor.constraint(equalTo: infoStackView.leadingAnchor,
+                                                constant: GlobalConstants.subViewsBorderInset),
+            infoHeader.trailingAnchor.constraint(equalTo: infoStackView.trailingAnchor,
+                                                 constant: -GlobalConstants.subViewsBorderInset)
         ])
         
         NSLayoutConstraint.activate([
-            infoText.topAnchor.constraint(equalTo: infoHeader.bottomAnchor, constant: GlobalConstants.subViewsBorderInset),
-            infoText.leadingAnchor.constraint(equalTo: infoStackView.leadingAnchor, constant: GlobalConstants.subViewsBorderInset),
-            infoText.trailingAnchor.constraint(equalTo: infoStackView.trailingAnchor, constant: -GlobalConstants.subViewsBorderInset),
-            infoText.bottomAnchor.constraint(equalTo: infoStackView.bottomAnchor)
+            infoText.topAnchor.constraint(equalTo: infoHeader.bottomAnchor,
+                                          constant: GlobalConstants.subViewsBorderInset),
+            infoText.leadingAnchor.constraint(equalTo: infoStackView.leadingAnchor,
+                                              constant: GlobalConstants.subViewsBorderInset),
+            infoText.trailingAnchor.constraint(equalTo: infoStackView.trailingAnchor,
+                                               constant: -GlobalConstants.subViewsBorderInset),
+            infoText.bottomAnchor.constraint(equalTo: infoStackView.bottomAnchor,
+                                             constant: -GlobalConstants.subViewsBorderInset)
         ])
     }
 }

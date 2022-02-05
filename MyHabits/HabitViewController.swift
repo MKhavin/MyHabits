@@ -3,6 +3,7 @@ import UIKit
 class HabitViewController: UIViewController {
 
     private let isNewHabit: Bool
+    private let habit: Habit?
     
     private lazy var cancelButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
@@ -67,8 +68,18 @@ class HabitViewController: UIViewController {
         return view
     }()
     
-    init(isNewHabit: Bool) {
+    private lazy var deleteButton: UIButton = {
+        let view = UIButton()
+        view.setTitle("Удалить привычку", for: .normal)
+        view.setTitleColor(.red, for: .normal)
+        view.toAutoLayout()
+        view.addTarget(self, action: #selector(deleteHabit), for: .touchUpInside)
+        return view
+    }()
+    
+    init(isNewHabit: Bool, habit: Habit? = nil) {
         self.isNewHabit = isNewHabit
+        self.habit = habit
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -79,23 +90,40 @@ class HabitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setHabitData()
+        
         view.backgroundColor = .systemBackground
         view.addSubviews([
             textEditHeader, textEdit, colorPickerHeader,
             colorPicker, timeHeader, timeInfoHeader,
             timeInfo, datePicker
         ])
+        
+        if !isNewHabit {
+            view.addSubview(deleteButton)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBar()
+        setHabitData()
     }
     
     override func viewWillLayoutSubviews() {
         setSubViewsLayout()
     }
 
+    private func setHabitData() {
+        guard let data = habit else {
+            return
+        }
+        
+        colorPicker.backgroundColor = data.color
+        datePicker.date = data.date
+        textEdit.text = data.name
+    }
+    
     private func setNavigationBar() {
         navigationItem.title = isNewHabit ? "Создать" : "Править"
         navigationItem.setLeftBarButton(cancelButton, animated: false)
@@ -170,18 +198,38 @@ class HabitViewController: UIViewController {
             datePicker.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                                                constant: -GlobalConstants.subViewsBorderInset)
         ])
+        
+        if !isNewHabit {
+            NSLayoutConstraint.activate([
+                deleteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
+                deleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            ])
+        }
+    }
+    
+    private func saveChanges() {
+        if isNewHabit {
+            let newHabit = Habit(name: textEdit.text ?? "",
+                                 date: datePicker.date,
+                                 color: colorPicker.backgroundColor ?? .orange)
+            GlobalConstants.habitsStore.habits.append(newHabit)
+        } else {
+            habit?.color = colorPicker.backgroundColor ?? .orange
+            habit?.date = datePicker.date
+            habit?.name = textEdit.text ?? ""
+            GlobalConstants.habitsStore.save()
+        }
     }
     
     @objc func cancel() {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
     
     @objc func save() {
-        let newHabit = Habit(name: textEdit.text ?? "",
-                             date: datePicker.date,
-                             color: colorPicker.backgroundColor ?? .orange)
-        let store = HabitsStore.shared
-        store.habits.append(newHabit)
+        saveChanges()
+        let notification = isNewHabit ? NSNotification.Name(rawValue: GlobalConstants.NotificationsIdentifiers.addHabit.rawValue)
+        : NSNotification.Name(rawValue: "HabitDidEdit")
+        NotificationCenter.default.post(name: notification, object: nil)
         cancel()
     }
     
@@ -194,6 +242,24 @@ class HabitViewController: UIViewController {
     
     @objc func setData(sender: UIDatePicker) {
         timeInfo.text = "\(dateFormatter.string(from: sender.date))"
+    }
+    
+    @objc func deleteHabit(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "Удалить привычку",
+                                      message: "Вы хотите удалить привычку \"\(habit?.name ?? "")\" ?", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "Отмена", style: .cancel)
+        
+        let delete = UIAlertAction(title: "Удалить", style: .destructive) { _ in
+            GlobalConstants.habitsStore.habits.removeAll() {
+                $0 === self.habit
+            }
+            NotificationCenter.default.post(name: NSNotification.Name("DeleteHabit"), object: nil)
+            self.dismiss(animated: true)
+        }
+        
+        alert.addActions([delete, cancel])
+        present(alert, animated: true)
     }
 }
 

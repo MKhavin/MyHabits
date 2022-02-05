@@ -21,3 +21,9 @@ extension UILabel {
         self.text = customFont.isUppercase ? text.uppercased() : text
     }
 }
+
+extension UIAlertController {
+    public func addActions(_ actions: [UIAlertAction]) {
+        actions.forEach() { self.addAction($0) }
+    }
+}

@@ -21,7 +21,8 @@ class TabBarController: UITabBarController {
         let habitsNavController = UINavigationController()
         habitsNavController.setViewControllers([HabitsViewController()], animated: false)
         habitsNavController.tabBarItem.title = "Привычки"
-        habitsNavController.tabBarItem.image = UIImage(systemName: "list.dash")
+//        habitsNavController.tabBarItem.image = UIImage(systemName: "list.dash")
+        habitsNavController.tabBarItem.image = UIImage(systemName: "equal")
         
         let infoNavigationController = UINavigationController()
         infoNavigationController.setViewControllers([InfoViewController()], animated: false)
