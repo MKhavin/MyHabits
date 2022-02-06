@@ -2,35 +2,39 @@ import UIKit
 
 class HabitsViewController: UIViewController {
 
+    /// Перечисление, в котором хранятся идентификаторы уведомлений
     private enum CollectionViewIdentifiers: String {
         case progressCell = "Progress cell"
         case habitCell = "Habit cell"
     }
-        
+    
+    /// Ссылка на ячейку прогресса для дальнейшего обновления
+    private weak var progressCell: ProgressCollectionViewCell?
+    
+    // MARK: - UI elements
+    
+    /// Кнопка добавления новой привычки в навигационном баре
     private lazy var addButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addHabit))
+        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewHabit))
         button.tintColor = FontsColor.purple
         return button
     }()
     
+    /// Коллекция ячеек с краткой информацией по привычкам
     private lazy var habitsCollection: UICollectionView = {
         let view = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        view.toAutoLayout()
         view.delegate = self
         view.dataSource = self
-        view.toAutoLayout()
         view.backgroundColor = FontsColor.white
         view.register(ProgressCollectionViewCell.self,
                       forCellWithReuseIdentifier: CollectionViewIdentifiers.progressCell.rawValue)
         view.register(HabitCollectionViewCell.self,
                       forCellWithReuseIdentifier: CollectionViewIdentifiers.habitCell.rawValue)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.updateHabitsProgress),
-                                               name: NSNotification.Name(GlobalConstants.NotificationsIdentifiers.updateProgress.rawValue),
-                                               object: nil)
         return view
     }()
-        
-    private var progressCell: ProgressCollectionViewCell?
+    
+    // MARK: Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,42 +60,59 @@ class HabitsViewController: UIViewController {
         setNavigationBar()
     }
 
+    /// Процедура настройки навигационного бара
     private func setNavigationBar() {
         navigationItem.setRightBarButton(addButton, animated: false)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
         navigationItem.title = "Сегодня"
     }
-     
+    
+    /// Процедура добавления обработчиков уведомлений
     private func setViewObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.addHabitToCollection),
                                                name: NSNotification.Name(GlobalConstants.NotificationsIdentifiers.addHabit.rawValue),
                                                object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.updateHabitsProgress),
+                                               name: NSNotification.Name(GlobalConstants.NotificationsIdentifiers.updateProgress.rawValue),
+                                               object: nil)
     }
     
-    func updateHabit(at item: Int) {
-        habitsCollection.reloadItems(at: [IndexPath(item: item, section: 1)])
+    // MARK: - Delegate methods
+    
+    //Процедура предназначена для обновления конкретной ячейки
+    func updateHabitInCollection(at item: Int) {
+        let currentIndex = IndexPath(item: item, section: 1)
+        habitsCollection.reloadItems(at: [currentIndex])
     }
     
-    func deleteHabit(at item: Int) {
-        habitsCollection.deleteItems(at: [IndexPath(item: item, section: 1)])
+    //Процедура предназначена для удаления конкретной ячейки
+    func deleteHabitInCollection(at item: Int) {
+        let currentIndex = IndexPath(item: item, section: 1)
+        habitsCollection.deleteItems(at: [currentIndex])
     }
     
-    @objc func addHabit() {
+    // MARK: - Target's logic
+    
+    /// Процедура вызова формы добавления новой привычки
+    @objc func addNewHabit() {
         let navigationController = UINavigationController()
-        navigationController.setViewControllers([HabitViewController(isNewHabit: true)], animated: false)
+        let rootView = HabitViewController(isNewHabit: true)
+        navigationController.setViewControllers([rootView], animated: false)
         present(navigationController, animated: true)
     }
     
+    /// Процедура обработки добавления новой привычки
     @objc func addHabitToCollection(_ sender: NSNotification) {
-        habitsCollection.insertItems(at: [
-            IndexPath(item: GlobalConstants.habitsStore.habits.count - 1,
-                      section: 1)
-        ])
+        let currentIndex = IndexPath(item: GlobalConstants.habitsStore.habits.count - 1,
+                                     section: 1)
+        habitsCollection.insertItems(at: [currentIndex])
         updateHabitsProgress()
     }
     
+    ///  Процедура обновления прогресса выполнения
     @objc func updateHabitsProgress() {
         guard progressCell != nil else {
             return
@@ -100,6 +121,8 @@ class HabitsViewController: UIViewController {
         progressCell!.updateProgress()
     }
 }
+
+// MARK: - Collection data source
 
 extension HabitsViewController: UICollectionViewDataSource {
 
@@ -117,7 +140,8 @@ extension HabitsViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewIdentifiers.progressCell.rawValue, for: indexPath) as? ProgressCollectionViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewIdentifiers.progressCell.rawValue,
+                                                                for: indexPath) as? ProgressCollectionViewCell else {
                 return ProgressCollectionViewCell()
             }
             
@@ -127,7 +151,8 @@ extension HabitsViewController: UICollectionViewDataSource {
             
             return cell
         default:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewIdentifiers.habitCell.rawValue, for: indexPath) as? HabitCollectionViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewIdentifiers.habitCell.rawValue,
+                                                                for: indexPath) as? HabitCollectionViewCell else {
                 return HabitCollectionViewCell()
             }
             
@@ -140,7 +165,9 @@ extension HabitsViewController: UICollectionViewDataSource {
 
 extension HabitsViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
         switch section {
         case 0: return UIEdgeInsets(top: GlobalConstants.navBarTopInset, left: GlobalConstants.subViewsBorderInset,
                                     bottom: GlobalConstants.cellTopBottomInset * 2, right: GlobalConstants.subViewsBorderInset)
@@ -149,7 +176,9 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (UIScreen.main.bounds.width - GlobalConstants.subViewsBorderInset * 2).rounded()
         
         switch indexPath.section {
@@ -163,8 +192,11 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let habitDetailsView = HabitDetailsViewController(habitIndex: indexPath.item)
-        habitDetailsView.parentView = self
+        guard indexPath.section != 0 else {
+            return
+        }
+        
+        let habitDetailsView = HabitDetailsViewController(habitIndex: indexPath.item, parentView: self)
         navigationController?.pushViewController(habitDetailsView, animated: true)
     }
 }

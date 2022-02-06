@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5119E89E27B07460003C7496 /* HabitDetailsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5119E89D27B07460003C7496 /* HabitDetailsViewCell.swift */; };
 		513E8D2327824F0E00147F56 /* FontsColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 513E8D2227824F0E00147F56 /* FontsColor.swift */; };
 		5153F25127A3D0F900AE61B1 /* HabitDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153F25027A3D0F900AE61B1 /* HabitDetailsViewController.swift */; };
 		518D6A5B278F79BB00ECC103 /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 518D6A5A278F79BB00ECC103 /* ProgressCollectionViewCell.swift */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5119E89D27B07460003C7496 /* HabitDetailsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewCell.swift; sourceTree = "<group>"; };
 		513E8D2227824F0E00147F56 /* FontsColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsColor.swift; sourceTree = "<group>"; };
 		5153F25027A3D0F900AE61B1 /* HabitDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitDetailsViewController.swift; sourceTree = "<group>"; };
 		518D6A5A278F79BB00ECC103 /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -58,6 +60,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5119E89C27B073FB003C7496 /* HabitDetailsViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5153F25027A3D0F900AE61B1 /* HabitDetailsViewController.swift */,
+				5119E89D27B07460003C7496 /* HabitDetailsViewCell.swift */,
+			);
+			path = HabitDetailsViewController;
+			sourceTree = "<group>";
+		};
 		513E8D2127824EF700147F56 /* TextStyle */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,8 +119,8 @@
 				51F531022783113C006F6D8D /* TabBarController.swift */,
 				51940AE4278CBCC500EC7FA7 /* GlobalConstants.swift */,
 				519D9F1827A88E8F007FF6F0 /* HabitsViewController */,
+				5119E89C27B073FB003C7496 /* HabitDetailsViewController */,
 				51940AEA278CC4AD00EC7FA7 /* HabitViewController.swift */,
-				5153F25027A3D0F900AE61B1 /* HabitDetailsViewController.swift */,
 			);
 			path = MyHabits;
 			sourceTree = "<group>";
@@ -196,6 +207,7 @@
 				51940AEB278CC4AD00EC7FA7 /* HabitViewController.swift in Sources */,
 				51940AED278CCE7B00EC7FA7 /* Fonts.swift in Sources */,
 				5153F25127A3D0F900AE61B1 /* HabitDetailsViewController.swift in Sources */,
+				5119E89E27B07460003C7496 /* HabitDetailsViewCell.swift in Sources */,
 				518D6A5D278F79CB00ECC103 /* HabitCollectionViewCell.swift in Sources */,
 				51940AE7278CBE7300EC7FA7 /* ViewExtensions.swift in Sources */,
 				51BF4C14277CF16F0003D231 /* AppDelegate.swift in Sources */,
