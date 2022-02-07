@@ -68,9 +68,9 @@ class HabitDetailsViewController: UIViewController {
     
     private func setNavigationBar() {
         title = habit.name
-        navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.navigationBar.tintColor = FontsColor.purple
         navigationItem.setRightBarButton(editButton, animated: false)
+        navigationItem.largeTitleDisplayMode = .never
     }
     
     private func setViewObservers() {
@@ -88,7 +88,7 @@ class HabitDetailsViewController: UIViewController {
     
     @objc func editHabit(_ sender: UIBarButtonItem) {
         let navigationController = UINavigationController()
-        let rootView = HabitViewController(isNewHabit: false, habit: habit)
+        let rootView = HabitViewController(habit: habit)
         navigationController.setViewControllers([rootView], animated: false)
         present(navigationController, animated: true)
     }

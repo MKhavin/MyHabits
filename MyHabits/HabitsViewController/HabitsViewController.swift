@@ -64,6 +64,7 @@ class HabitsViewController: UIViewController {
     private func setNavigationBar() {
         navigationItem.setRightBarButton(addButton, animated: false)
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
         navigationItem.title = "Сегодня"
     }
@@ -92,6 +93,7 @@ class HabitsViewController: UIViewController {
     func deleteHabitInCollection(at item: Int) {
         let currentIndex = IndexPath(item: item, section: 1)
         habitsCollection.deleteItems(at: [currentIndex])
+        updateHabitsProgress()
     }
     
     // MARK: - Target's logic
@@ -99,7 +101,7 @@ class HabitsViewController: UIViewController {
     /// Процедура вызова формы добавления новой привычки
     @objc func addNewHabit() {
         let navigationController = UINavigationController()
-        let rootView = HabitViewController(isNewHabit: true)
+        let rootView = HabitViewController()
         navigationController.setViewControllers([rootView], animated: false)
         present(navigationController, animated: true)
     }
@@ -179,7 +181,7 @@ extension HabitsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (UIScreen.main.bounds.width - GlobalConstants.subViewsBorderInset * 2).rounded()
+        let width = (collectionView.bounds.width - GlobalConstants.subViewsBorderInset * 2).rounded()
         
         switch indexPath.section {
         case 0: return CGSize(width: width, height: 60)

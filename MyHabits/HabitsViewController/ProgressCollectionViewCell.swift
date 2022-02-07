@@ -3,12 +3,12 @@ import UIKit
 class ProgressCollectionViewCell: UICollectionViewCell {
     
     /// Перечисление, в котором хранятся значения констант AutoLayout
-    private enum LayoutConstants: CGFloat {
-        case topBottomInset = 10
-        case leadingTrailingInset = 12
-        case progressBottomInset = -15
-        case stackHeight = 20
-        case stackSpacing = 18
+    private enum LayoutConstants {
+        static let topBottomInset: CGFloat = 10
+        static let leadingTrailingInset: CGFloat = 12
+        static let progressBottomInset: CGFloat = -15
+        static let stackHeight: CGFloat = 20
+        static let stackSpacing: CGFloat = 18
     }
     
     /// Переменная, которая возвращает текущий прогресс в процентном соотношении
@@ -43,7 +43,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         let view = UIStackView()
         view.toAutoLayout()
         view.axis = .horizontal
-        view.spacing = LayoutConstants.stackSpacing.rawValue
+        view.spacing = LayoutConstants.stackSpacing
         
         let label = UILabel(font: Fonts.footnoteStatus,
                             text: "Все получится !")
@@ -74,23 +74,23 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     func setSubViewsLayout() {
         NSLayoutConstraint.activate([
             stackTitle.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor,
-                                            constant: LayoutConstants.topBottomInset.rawValue),
+                                            constant: LayoutConstants.topBottomInset),
             stackTitle.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
-                                                constant: LayoutConstants.leadingTrailingInset.rawValue),
+                                                constant: LayoutConstants.leadingTrailingInset),
             stackTitle.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
-                                                 constant: -LayoutConstants.leadingTrailingInset.rawValue),
-            stackTitle.heightAnchor.constraint(equalToConstant: LayoutConstants.stackHeight.rawValue)
+                                                 constant: -LayoutConstants.leadingTrailingInset),
+            stackTitle.heightAnchor.constraint(equalToConstant: LayoutConstants.stackHeight)
         ])
         
         NSLayoutConstraint.activate([
             progressView.topAnchor.constraint(equalTo: stackTitle.bottomAnchor,
-                                              constant: LayoutConstants.topBottomInset.rawValue),
+                                              constant: LayoutConstants.topBottomInset),
             progressView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor,
-                                                  constant: LayoutConstants.leadingTrailingInset.rawValue),
+                                                  constant: LayoutConstants.leadingTrailingInset),
             progressView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor,
-                                                   constant: -LayoutConstants.leadingTrailingInset.rawValue),
+                                                   constant: -LayoutConstants.leadingTrailingInset),
             progressView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor,
-                                                 constant: LayoutConstants.progressBottomInset.rawValue)
+                                                 constant: LayoutConstants.progressBottomInset)
         ])
     }
     

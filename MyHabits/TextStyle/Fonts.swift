@@ -1,7 +1,7 @@
 import UIKit
 
 extension UIFont {
-    
+    /// Функция, которая предназначена для получения шрифтов с нужным размером и жирностью
     static func preferredFont(forTextStyle style: TextStyle,
                               withSize size: CGFloat,
                               withWeight weight: Weight = Weight.regular) -> UIFont {
@@ -13,6 +13,7 @@ extension UIFont {
     
 }
     
+/// Структура, которая хранит сведения о шрифте, цвете и регистре символов
 struct Font {
     let font: UIFont
     let color: UIColor

@@ -1,9 +1,17 @@
 import UIKit
 
 class HabitViewController: UIViewController {
-
-    private let isNewHabit: Bool
     private let habit: Habit?
+    private let colorPickerSize: CGFloat = 30
+    
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = .autoupdatingCurrent
+        formatter.timeStyle = .short
+        return formatter
+    }()
+    
+    // MARK: - UI elements
     
     private lazy var cancelButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
@@ -32,12 +40,13 @@ class HabitViewController: UIViewController {
         view.datePickerMode = .time
         view.date = Date()
         view.preferredDatePickerStyle = .wheels
+        view.locale = .autoupdatingCurrent
         view.toAutoLayout()
-        view.addTarget(self, action: #selector(setData), for: .valueChanged)
+        view.addTarget(self, action: #selector(setDate), for: .valueChanged)
         return view
     }()
     
-    private lazy var textEditHeader = UILabel(font: Fonts.footnoteUppercase, text: "название")
+    private lazy var habitNameHeader = UILabel(font: Fonts.footnoteUppercase, text: "название")
     
     private lazy var colorPickerHeader = UILabel(font: Fonts.footnoteUppercase, text: "цвет")
     
@@ -45,7 +54,7 @@ class HabitViewController: UIViewController {
     
     private lazy var timeInfoHeader = UILabel(font: Fonts.body, text: "Каждый день в")
     
-    private lazy var textEdit: UITextField = {
+    private lazy var habitName: UITextField = {
         let view = UITextField()
         view.toAutoLayout()
         view.font = Fonts.headLine.font
@@ -53,13 +62,6 @@ class HabitViewController: UIViewController {
         view.tintColor = Fonts.body.color
         view.placeholder = "Бегать по утрам, спать 8 часов и т.п."
         return view
-    }()
-    
-    private lazy var dateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-    //        formatter.timeZone = TimeZone(abbreviation: "GMT+0:00") //Current time zone
-            formatter.dateFormat = "HH:MM a"
-        return formatter
     }()
     
     private lazy var timeInfo: UILabel = {
@@ -77,8 +79,9 @@ class HabitViewController: UIViewController {
         return view
     }()
     
-    init(isNewHabit: Bool, habit: Habit? = nil) {
-        self.isNewHabit = isNewHabit
+    // MARK: - Lifecycle
+    
+    init(habit: Habit? = nil) {
         self.habit = habit
         super.init(nibName: nil, bundle: nil)
     }
@@ -94,12 +97,12 @@ class HabitViewController: UIViewController {
         
         view.backgroundColor = .systemBackground
         view.addSubviews([
-            textEditHeader, textEdit, colorPickerHeader,
+            habitNameHeader, habitName, colorPickerHeader,
             colorPicker, timeHeader, timeInfoHeader,
             timeInfo, datePicker
         ])
         
-        if !isNewHabit {
+        if habit != nil {
             view.addSubview(deleteButton)
         }
     }
@@ -107,13 +110,13 @@ class HabitViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setNavigationBar()
-        setHabitData()
     }
     
     override func viewWillLayoutSubviews() {
         setSubViewsLayout()
     }
 
+    /// Процедура, которая заполняет данные текущей привычки
     private func setHabitData() {
         guard let data = habit else {
             return
@@ -121,36 +124,38 @@ class HabitViewController: UIViewController {
         
         colorPicker.backgroundColor = data.color
         datePicker.date = data.date
-        textEdit.text = data.name
+        habitName.text = data.name
     }
     
+    /// Процедура для формирования navigationBar
     private func setNavigationBar() {
-        navigationItem.title = isNewHabit ? "Создать" : "Править"
+        navigationItem.title = (habit == nil) ? "Создать" : "Править"
         navigationItem.setLeftBarButton(cancelButton, animated: false)
         navigationItem.setRightBarButton(saveButton, animated: false)
     }
     
+    /// Процедура, которая задает AutoLayout constraints
     private func setSubViewsLayout() {
         NSLayoutConstraint.activate([
-            textEditHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+            habitNameHeader.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                                 constant: GlobalConstants.navBarTopInset),
-            textEditHeader.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+            habitNameHeader.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
                                                     constant: GlobalConstants.subViewsBorderInset),
-            textEditHeader.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+            habitNameHeader.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                                                      constant: -GlobalConstants.subViewsBorderInset)
         ])
         
         NSLayoutConstraint.activate([
-            textEdit.topAnchor.constraint(equalTo: textEditHeader.bottomAnchor,
+            habitName.topAnchor.constraint(equalTo: habitNameHeader.bottomAnchor,
                                           constant: GlobalConstants.groupItemTopInset),
-            textEdit.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
+            habitName.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
                                               constant: GlobalConstants.subViewsBorderInset),
-            textEdit.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
+            habitName.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor,
                                                constant: -GlobalConstants.subViewsBorderInset)
         ])
         
         NSLayoutConstraint.activate([
-            colorPickerHeader.topAnchor.constraint(equalTo: textEdit.bottomAnchor,
+            colorPickerHeader.topAnchor.constraint(equalTo: habitName.bottomAnchor,
                                           constant: GlobalConstants.groupTopInset),
             colorPickerHeader.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
                                               constant: GlobalConstants.subViewsBorderInset),
@@ -163,8 +168,8 @@ class HabitViewController: UIViewController {
                                              constant: GlobalConstants.groupItemTopInset),
             colorPicker.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor,
                                                  constant: GlobalConstants.subViewsBorderInset),
-            colorPicker.widthAnchor.constraint(equalToConstant: 30),
-            colorPicker.heightAnchor.constraint(equalToConstant: 30)
+            colorPicker.widthAnchor.constraint(equalToConstant: colorPickerSize),
+            colorPicker.heightAnchor.constraint(equalToConstant: colorPickerSize)
         ])
         
         NSLayoutConstraint.activate([
@@ -199,7 +204,7 @@ class HabitViewController: UIViewController {
                                                constant: -GlobalConstants.subViewsBorderInset)
         ])
         
-        if !isNewHabit {
+        if habit != nil {
             NSLayoutConstraint.activate([
                 deleteButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
                 deleteButton.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -207,16 +212,19 @@ class HabitViewController: UIViewController {
         }
     }
     
+    // MARK: - Target's funcs
+    
+    /// Процедура создания/сохранения данных привычки
     private func saveChanges() {
-        if isNewHabit {
-            let newHabit = Habit(name: textEdit.text ?? "",
+        if habit == nil {
+            let newHabit = Habit(name: habitName.text ?? "",
                                  date: datePicker.date,
                                  color: colorPicker.backgroundColor ?? .orange)
             GlobalConstants.habitsStore.habits.append(newHabit)
         } else {
             habit?.color = colorPicker.backgroundColor ?? .orange
             habit?.date = datePicker.date
-            habit?.name = textEdit.text ?? ""
+            habit?.name = habitName.text ?? ""
             GlobalConstants.habitsStore.save()
         }
     }
@@ -227,8 +235,8 @@ class HabitViewController: UIViewController {
     
     @objc func save() {
         saveChanges()
-        let notification = isNewHabit ? NSNotification.Name(rawValue: GlobalConstants.NotificationsIdentifiers.addHabit.rawValue)
-        : NSNotification.Name(rawValue: "HabitDidEdit")
+        let notification = (habit == nil) ? NSNotification.Name(rawValue: GlobalConstants.NotificationsIdentifiers.addHabit.rawValue)
+        : NSNotification.Name(rawValue: GlobalConstants.NotificationsIdentifiers.habitDidEdit.rawValue)
         NotificationCenter.default.post(name: notification, object: nil)
         cancel()
     }
@@ -240,21 +248,20 @@ class HabitViewController: UIViewController {
         present(picker, animated: true, completion: nil)
     }
     
-    @objc func setData(sender: UIDatePicker) {
+    @objc func setDate(sender: UIDatePicker) {
         timeInfo.text = "\(dateFormatter.string(from: sender.date))"
     }
     
     @objc func deleteHabit(_ sender: UIButton) {
-        
         let alert = UIAlertController(title: "Удалить привычку",
                                       message: "Вы хотите удалить привычку \"\(habit?.name ?? "")\" ?", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "Отмена", style: .cancel)
-        
         let delete = UIAlertAction(title: "Удалить", style: .destructive) { _ in
             GlobalConstants.habitsStore.habits.removeAll() {
                 $0 === self.habit
             }
-            NotificationCenter.default.post(name: NSNotification.Name("DeleteHabit"), object: nil)
+            NotificationCenter.default.post(name: NSNotification.Name(GlobalConstants.NotificationsIdentifiers.deleteHabit.rawValue),
+                                            object: nil)
             self.dismiss(animated: true)
         }
         
@@ -262,6 +269,8 @@ class HabitViewController: UIViewController {
         present(alert, animated: true)
     }
 }
+
+// MARK: - ColorPicker delegate
 
 extension HabitViewController: UIColorPickerViewControllerDelegate {
     

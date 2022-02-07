@@ -3,10 +3,10 @@ import UIKit
 class HabitCollectionViewCell: UICollectionViewCell {
     
     /// Перечисление с константами для AutoLayout
-    private enum LayoutConstants: CGFloat {
-        case deafultValue = 20
-        case titleWidth = 220
-        case widthHeightCheckButton = 38
+    private enum LayoutConstants {
+        static let deafultValue: CGFloat = 20
+        static let titleWidth: CGFloat = 220
+        static let widthHeightCheckButton: CGFloat = 38
     }
     
     /// Текущая привычка в коллекции
@@ -69,26 +69,26 @@ class HabitCollectionViewCell: UICollectionViewCell {
     /// Процедура задания расположения элементов
     private func setSubViewsLayout() {
         NSLayoutConstraint.activate([
-            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: LayoutConstants.deafultValue.rawValue),
-            titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.deafultValue.rawValue),
-            titleLabel.widthAnchor.constraint(equalToConstant: LayoutConstants.titleWidth.rawValue)
+            titleLabel.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: LayoutConstants.deafultValue),
+            titleLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.deafultValue),
+            titleLabel.widthAnchor.constraint(equalToConstant: LayoutConstants.titleWidth)
         ])
         
         NSLayoutConstraint.activate([
             infoLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 4),
-            infoLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.deafultValue.rawValue)
+            infoLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.deafultValue)
         ])
         
         NSLayoutConstraint.activate([
-            countLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -LayoutConstants.deafultValue.rawValue),
-            countLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.deafultValue.rawValue)
+            countLabel.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -LayoutConstants.deafultValue),
+            countLabel.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: LayoutConstants.deafultValue)
         ])
         
         NSLayoutConstraint.activate([
             checkButton.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor),
-            checkButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -LayoutConstants.deafultValue.rawValue),
-            checkButton.widthAnchor.constraint(equalToConstant: LayoutConstants.widthHeightCheckButton.rawValue),
-            checkButton.heightAnchor.constraint(equalToConstant: LayoutConstants.widthHeightCheckButton.rawValue)
+            checkButton.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -LayoutConstants.deafultValue),
+            checkButton.widthAnchor.constraint(equalToConstant: LayoutConstants.widthHeightCheckButton),
+            checkButton.heightAnchor.constraint(equalToConstant: LayoutConstants.widthHeightCheckButton)
         ])
     }
     

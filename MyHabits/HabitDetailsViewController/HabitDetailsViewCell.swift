@@ -2,9 +2,9 @@ import UIKit
 
 class HabitDetailsViewCell: UITableViewCell {
 
-    private enum LayoutConstants: CGFloat {
-        case cellTopBottomInset = 11
-        case cellLeadingTrailingInset = 16
+    private enum LayoutConstants {
+        static let cellTopBottomInset: CGFloat = 11
+        static let cellLeadingTrailingInset: CGFloat = 16
     }
     
     lazy var label = UILabel(font: Fonts.body)
@@ -18,13 +18,13 @@ class HabitDetailsViewCell: UITableViewCell {
         
         NSLayoutConstraint.activate([
             label.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor,
-                                           constant: LayoutConstants.cellTopBottomInset.rawValue),
+                                           constant: LayoutConstants.cellTopBottomInset),
             label.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor,
-                                              constant: -LayoutConstants.cellTopBottomInset.rawValue),
+                                              constant: -LayoutConstants.cellTopBottomInset),
             label.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor,
-                                               constant: LayoutConstants.cellLeadingTrailingInset.rawValue),
+                                               constant: LayoutConstants.cellLeadingTrailingInset),
             label.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor,
-                                                constant: -LayoutConstants.cellLeadingTrailingInset.rawValue)
+                                                constant: -LayoutConstants.cellLeadingTrailingInset)
         ])
     }
     

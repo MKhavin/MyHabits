@@ -2,22 +2,21 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
-    private lazy var infoStackView: UIScrollView = {
-        let value = UIScrollView()
-        value.toAutoLayout()
-        value.showsVerticalScrollIndicator = true
-        value.showsHorizontalScrollIndicator = false
-        value.addSubviews([
+    private lazy var infoScrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.toAutoLayout()
+        view.showsVerticalScrollIndicator = true
+        view.showsHorizontalScrollIndicator = false
+        view.addSubviews([
             infoHeader,
             infoText
         ])
-        return value
+        return view
     }()
     
-    
     private lazy var infoHeader: UILabel = {
-        let value = UILabel(font: Fonts.title3, text: "Привычка за 21 день")
-        return value
+        let view = UILabel(font: Fonts.title3, text: "Привычка за 21 день")
+        return view
     }()
     
     private lazy var infoText: UILabel = {
@@ -37,49 +36,52 @@ class InfoViewController: UIViewController {
         
         6. На 90-й день соблюдения техники все лишнее из «прошлой жизни» перестает напоминать о себе, и человек, оглянувшись назад, осознает себя полностью обновившимся.
         """
-        let value = UILabel(font: Fonts.body, text: text)
-        value.textAlignment = .left
-        value.numberOfLines = 0
-        value.lineBreakMode = .byWordWrapping
-        return value
+        let view = UILabel(font: Fonts.body, text: text)
+        view.textAlignment = .left
+        view.numberOfLines = 0
+        view.lineBreakMode = .byWordWrapping
+        return view
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setNavigationBar()
+        view.addSubview(infoScrollView)
+    }
+    
+    private func setNavigationBar() {
         navigationItem.title = "Информация"
         navigationController?.navigationBar.scrollEdgeAppearance = navigationController?.navigationBar.standardAppearance
-        
-        view.addSubview(infoStackView)
     }
     
     override func viewWillLayoutSubviews() {
         NSLayoutConstraint.activate([
-            infoStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            infoStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            infoStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            infoStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            infoStackView.contentLayoutGuide.leadingAnchor.constraint(equalTo: infoStackView.leadingAnchor),
-            infoStackView.contentLayoutGuide.trailingAnchor.constraint(equalTo: infoStackView.trailingAnchor)
+            infoScrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            infoScrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            infoScrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            infoScrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            infoScrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: infoScrollView.leadingAnchor),
+            infoScrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: infoScrollView.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([
-            infoHeader.topAnchor.constraint(equalTo: infoStackView.topAnchor,
+            infoHeader.topAnchor.constraint(equalTo: infoScrollView.topAnchor,
                                             constant: GlobalConstants.subViewsBorderInset),
-            infoHeader.leadingAnchor.constraint(equalTo: infoStackView.leadingAnchor,
+            infoHeader.leadingAnchor.constraint(equalTo: infoScrollView.leadingAnchor,
                                                 constant: GlobalConstants.subViewsBorderInset),
-            infoHeader.trailingAnchor.constraint(equalTo: infoStackView.trailingAnchor,
+            infoHeader.trailingAnchor.constraint(equalTo: infoScrollView.trailingAnchor,
                                                  constant: -GlobalConstants.subViewsBorderInset)
         ])
         
         NSLayoutConstraint.activate([
             infoText.topAnchor.constraint(equalTo: infoHeader.bottomAnchor,
                                           constant: GlobalConstants.subViewsBorderInset),
-            infoText.leadingAnchor.constraint(equalTo: infoStackView.leadingAnchor,
+            infoText.leadingAnchor.constraint(equalTo: infoScrollView.leadingAnchor,
                                               constant: GlobalConstants.subViewsBorderInset),
-            infoText.trailingAnchor.constraint(equalTo: infoStackView.trailingAnchor,
+            infoText.trailingAnchor.constraint(equalTo: infoScrollView.trailingAnchor,
                                                constant: -GlobalConstants.subViewsBorderInset),
-            infoText.bottomAnchor.constraint(equalTo: infoStackView.bottomAnchor,
+            infoText.bottomAnchor.constraint(equalTo: infoScrollView.bottomAnchor,
                                              constant: -GlobalConstants.subViewsBorderInset)
         ])
     }
